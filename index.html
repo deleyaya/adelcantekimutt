@@ -6,100 +6,205 @@
 <title>Website Adell</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1c1b22;--yellow:#ffd500;--bg:#f6f7fb;--white:#fff;--muted:#5d5c6b}
+:root{
+  --cream:#fff6c9;      /* kuning muda */
+  --butter:#ffe98a;     /* kuning mentega */
+  --sun:#ffd95a;
+  --latte:#e6c9a3;      /* coklat muda */
+  --caramel:#c99a6b;
+  --cocoa:#6b4a33;      /* coklat tua untuk teks & garis */
+  --milk:#fffdf2;
+  --muted:#8a6b52;
+  --pink:#f6b3a8;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+body{
+  font-family:'Nunito',system-ui,sans-serif;color:var(--cocoa);line-height:1.7;
+  background-color:var(--cream);
+  background-image:radial-gradient(var(--butter) 2.5px,transparent 2.5px),radial-gradient(var(--latte) 2px,transparent 2px);
+  background-size:38px 38px,57px 57px;background-position:0 0,19px 25px;
+  overflow-x:hidden;
+}
+h1,h2,h3,.brand,.acc-btn{font-family:'Fredoka',system-ui,sans-serif}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-section[id]{scroll-margin-top:80px}
+:focus-visible{outline:3px solid var(--cocoa);outline-offset:3px}
+section[id]{scroll-margin-top:90px}
 
-/* Menu */
-.topbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:8px;padding:12px clamp(14px,4vw,40px);background:var(--ink)}
-.brand{color:var(--yellow);font-weight:700;font-size:1.3rem;text-decoration:none}
+/* ===== Hiasan melayang ===== */
+.floaty{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.floaty span{position:absolute;font-size:1.6rem;opacity:.55;animation:melayang 9s ease-in-out infinite}
+.floaty span:nth-child(1){left:6%;top:18%}
+.floaty span:nth-child(2){left:90%;top:26%;animation-delay:-2s}
+.floaty span:nth-child(3){left:12%;top:70%;animation-delay:-4s}
+.floaty span:nth-child(4){left:84%;top:78%;animation-delay:-6s}
+.floaty span:nth-child(5){left:48%;top:8%;animation-delay:-3s}
+.floaty span:nth-child(6){left:70%;top:55%;animation-delay:-5s}
+@keyframes melayang{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-22px) rotate(10deg)}}
+
+/* ===== Menu ===== */
+.topbar{
+  position:sticky;top:10px;z-index:20;margin:10px auto 0;width:min(1080px,calc(100% - 24px));
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
+  padding:8px 12px 8px 16px;background:var(--milk);border:3px solid var(--cocoa);border-radius:999px;
+  box-shadow:0 5px 0 var(--cocoa)
+}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1.35rem;text-decoration:none}
+.brand svg{width:34px;height:34px}
 .topbar nav{display:flex;gap:4px;flex-wrap:wrap}
-.topbar nav a{color:#fff;text-decoration:none;font-weight:500;padding:7px 14px;border-radius:999px;transition:.2s}
-.topbar nav a:hover{background:var(--yellow);color:var(--ink)}
+.topbar nav a{text-decoration:none;font-weight:700;padding:6px 14px;border-radius:999px;transition:.2s}
+.topbar nav a:hover{background:var(--sun);transform:translateY(-2px) rotate(-2deg)}
 
-.box{max-width:1080px;margin:0 auto;padding:clamp(36px,6vw,72px) clamp(16px,4vw,32px) 0}
-h2{font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:22px;display:inline-block;
-  background:linear-gradient(transparent 58%,var(--yellow) 58% 92%,transparent 92%);padding:0 6px}
-.card{background:var(--white);border:2px solid var(--ink);border-radius:18px;box-shadow:5px 5px 0 var(--ink)}
+.box{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:clamp(36px,6vw,70px) clamp(16px,4vw,32px) 0}
+h2{
+  font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:24px;display:inline-block;padding:2px 18px;
+  background:var(--latte);border:3px solid var(--cocoa);border-radius:999px;box-shadow:4px 4px 0 var(--cocoa);
+  transform:rotate(-1.5deg)
+}
+.card{background:var(--milk);border:3px solid var(--cocoa);border-radius:22px;box-shadow:5px 5px 0 var(--latte),5px 5px 0 3px var(--cocoa)}
 
-/* Tugas 1 - profil */
-.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(24px,5vw,56px);align-items:center;margin-bottom:34px}
-.hero small{font-weight:600;font-size:1.05rem}
-.hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin:6px 0 12px}
-.hero p{color:var(--muted);font-size:1.1rem}
-.avatar{position:relative;width:min(100%,280px);aspect-ratio:1;margin:0 auto;border-radius:50%;
-  background:var(--yellow);border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);
-  display:grid;place-items:center;font-size:5rem;font-weight:700}
-.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+/* ===== Hero ===== */
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(24px,5vw,56px);align-items:center;margin-bottom:38px}
+.hero small{display:inline-block;font-weight:700;background:var(--butter);border:2px solid var(--cocoa);border-radius:999px;padding:2px 14px}
+.hero h1{font-size:clamp(2.1rem,5.5vw,3.5rem);line-height:1.1;margin:12px 0}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 60%,var(--sun) 60%)}
+.hero p{color:var(--muted);font-size:1.12rem}
+.wave{display:inline-block;transform-origin:70% 70%;animation:wave 2s infinite}
+@keyframes wave{0%,60%,100%{transform:rotate(0)}10%,30%{transform:rotate(16deg)}20%,40%{transform:rotate(-10deg)}50%{transform:rotate(8deg)}}
+.typing{min-height:1.8em;margin-top:10px;font-weight:700;font-family:'Fredoka',sans-serif;font-size:1.15rem}
+.typing::after{content:"|";animation:kedip 1s steps(1) infinite}
+@keyframes kedip{50%{opacity:0}}
 
-.data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.data{padding:14px 18px}
-.data span{display:block;font-size:.85rem;color:var(--muted)}
-.data b{font-weight:600;overflow-wrap:anywhere}
-.hobi{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;list-style:none}
-.hobi li{background:var(--yellow);border:2px solid var(--ink);border-radius:999px;padding:6px 16px;font-weight:600}
+.mascot{position:relative;width:min(100%,300px);margin:0 auto}
+.mascot .bear{width:100%;display:block;animation:goyang 4s ease-in-out infinite;filter:drop-shadow(0 8px 0 rgba(107,74,51,.25))}
+@keyframes goyang{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-6px)}}
+.bubble{position:absolute;top:-6px;right:-14px;background:#fff;border:3px solid var(--cocoa);border-radius:18px;padding:4px 12px;font-weight:700;font-family:'Fredoka',sans-serif;animation:muncul 3s ease-in-out infinite;transform-origin:bottom left}
+.bubble::after{content:"";position:absolute;left:14px;bottom:-12px;width:14px;height:14px;background:#fff;border-right:3px solid var(--cocoa);border-bottom:3px solid var(--cocoa);transform:rotate(45deg) skew(10deg,10deg)}
+@keyframes muncul{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.eye{transform-box:fill-box;transform-origin:center;animation:kedip-mata 4s infinite}
+@keyframes kedip-mata{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.paw-wave{transform-box:fill-box;transform-origin:30% 100%;animation:lambai 1.6s ease-in-out infinite}
+@keyframes lambai{0%,100%{transform:rotate(0)}50%{transform:rotate(-28deg)}}
 
-/* Tugas 2-4 - upload */
-.catatan{color:var(--muted);margin-bottom:18px;max-width:62ch}
-.tugas{background:var(--yellow);border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);padding:clamp(16px,3vw,26px)}
-.tugas input[type=text],.tugas textarea{width:100%;font:inherit;color:var(--ink);background:#fff;border:2px solid var(--ink);
-  border-radius:12px;padding:10px 12px;margin-bottom:10px}
-.tugas textarea{min-height:100px;resize:vertical}
-.drop{display:block;text-align:center;background:#fff;border:3px dashed var(--ink);border-radius:16px;
-  padding:26px 14px;cursor:pointer;font-weight:600;transition:.2s}
-.drop:hover,.drop.over{background:var(--ink);color:var(--yellow)}
-.drop small{display:block;font-weight:400;opacity:.8}
-.drop input{position:absolute;width:1px;height:1px;opacity:0}
-.drop:focus-within{outline:3px solid var(--ink);outline-offset:3px}
-.files{list-style:none;margin-top:14px;display:grid;gap:10px}
-.files li{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:8px 12px}
-.files img,.files .ico{width:46px;height:46px;border-radius:10px;object-fit:cover;flex:none;border:2px solid var(--ink)}
-.files .ico{display:grid;place-items:center;background:var(--yellow);font-weight:700;font-size:.75rem}
-.files .nama{flex:1;min-width:0}
-.files .nama a{font-weight:600;overflow-wrap:anywhere}
-.files .nama small{display:block;color:var(--muted)}
-.files button{font:inherit;font-weight:600;cursor:pointer;padding:5px 14px;border-radius:999px;border:2px solid var(--ink);background:#fff}
-.files button:hover{background:var(--ink);color:var(--yellow)}
-.kosong{color:var(--ink);opacity:.7;font-size:.92rem;margin-top:10px}
-.status{display:block;margin-top:8px;font-size:.88rem;font-weight:500;min-height:1.4em}
+/* avatar foto */
+.avatar-wrap{display:flex;justify-content:center;margin-bottom:20px}
+.avatar{position:relative;width:150px;aspect-ratio:1;border-radius:50%;background:var(--sun);border:4px solid var(--cocoa);
+  box-shadow:6px 6px 0 var(--latte),6px 6px 0 4px var(--cocoa);display:grid;place-items:center;font:700 3.4rem 'Fredoka',sans-serif;overflow:hidden}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
-/* Galeri */
-.sub{font-size:1.2rem;margin:0 0 14px}
-.photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-bottom:34px}
-.videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
-figure{overflow:hidden}
-figure img,figure video{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;background:#ddd}
+/* ===== Biodata ===== */
+.data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.data{padding:14px 18px;transition:.2s}
+.data:hover{transform:translateY(-4px) rotate(-1deg)}
+.data span{display:block;font-size:.82rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.data b{font-weight:700;font-size:1.05rem;overflow-wrap:anywhere}
+.hobi-title{margin:30px 0 12px;font-size:1.3rem}
+.hobi{display:flex;flex-wrap:wrap;gap:12px;list-style:none}
+.hobi li{background:var(--butter);border:3px solid var(--cocoa);border-radius:999px;padding:6px 18px;font-weight:700;cursor:default;transition:.25s}
+.hobi li:hover{background:var(--latte);transform:scale(1.1) rotate(-4deg)}
+
+/* ===== Galeri ===== */
+.galeri{margin-top:44px}
+.sub{font-size:1.3rem;margin:0 0 14px}
+.photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:36px}
+.videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+figure{overflow:hidden;transition:.25s}
+.photos figure:nth-child(odd){transform:rotate(-1.5deg)}
+.photos figure:nth-child(even){transform:rotate(1.5deg)}
+figure:hover{transform:rotate(0) scale(1.03)!important}
+figure img,figure video{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;background:var(--latte)}
 figure video{background:#000}
-figcaption{padding:10px 14px;font-size:.92rem;color:var(--muted);border-top:2px solid var(--ink)}
+figcaption{padding:10px 14px;font-size:.92rem;color:var(--muted);font-weight:600;border-top:3px solid var(--cocoa);background:var(--butter)}
 
-/* Accordion tugas */
-.acc{margin-bottom:16px;scroll-margin-top:80px}
-.acc-btn{width:100%;display:flex;justify-content:space-between;align-items:center;font:inherit;font-weight:700;
-  font-size:1.25rem;cursor:pointer;padding:14px 22px;background:var(--white);color:var(--ink);
-  border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);transition:.2s}
-.acc-btn:hover,.acc-btn[aria-expanded=true]{background:var(--yellow)}
-.acc-btn span{font-size:1.6rem;line-height:1;transition:transform .2s}
+/* ===== Tugas (accordion) ===== */
+.intro{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.intro svg{width:70px;height:70px;flex:none;animation:loncat 1.8s ease-in-out infinite}
+@keyframes loncat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.catatan{color:var(--muted);max-width:62ch;font-weight:600}
+.acc{margin-bottom:18px;scroll-margin-top:90px}
+.acc-btn{
+  width:100%;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:1.3rem;cursor:pointer;
+  padding:14px 22px;background:var(--milk);color:var(--cocoa);border:3px solid var(--cocoa);border-radius:20px;
+  box-shadow:0 6px 0 var(--cocoa);transition:.15s
+}
+.acc-btn:hover,.acc-btn[aria-expanded=true]{background:var(--butter)}
+.acc-btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--cocoa)}
+.acc-btn span{font-size:1.5rem;line-height:1;transition:transform .25s}
 .acc-btn[aria-expanded=true] span{transform:rotate(45deg)}
-.acc-panel{padding-top:18px}
-.galeri{margin-top:40px}
+.acc-panel{padding-top:20px}
+.tugas{background:var(--latte);border:3px solid var(--cocoa);border-radius:24px;box-shadow:6px 6px 0 var(--cocoa);padding:clamp(16px,3vw,26px);position:relative}
+.tugas input[type=text],.tugas textarea{width:100%;font:inherit;color:var(--cocoa);background:var(--milk);border:3px solid var(--cocoa);border-radius:14px;padding:10px 14px;margin-bottom:12px}
+.tugas input::placeholder,.tugas textarea::placeholder{color:#a88b72}
+.tugas textarea{min-height:100px;resize:vertical}
+.drop{display:block;text-align:center;background:var(--cream);border:3px dashed var(--cocoa);border-radius:18px;padding:26px 14px;cursor:pointer;font-weight:700;transition:.2s}
+.drop:hover,.drop.over{background:var(--sun);transform:scale(1.02)}
+.drop small{display:block;font-weight:600;opacity:.8}
+.drop input{position:absolute;width:1px;height:1px;opacity:0}
+.drop:focus-within{outline:3px solid var(--cocoa);outline-offset:3px}
+.status{display:block;margin-top:10px;font-size:.9rem;font-weight:700;min-height:1.4em}
+.files{list-style:none;margin-top:14px;display:grid;gap:10px}
+.files li{display:flex;align-items:center;gap:12px;background:var(--milk);border:3px solid var(--cocoa);border-radius:16px;padding:8px 12px;animation:masuk .35s}
+@keyframes masuk{from{transform:scale(.8);opacity:0}}
+.files img,.files .ico{width:48px;height:48px;border-radius:12px;object-fit:cover;flex:none;border:2px solid var(--cocoa)}
+.files .ico{display:grid;place-items:center;background:var(--butter);font-weight:700;font-size:.75rem}
+.files .nama{flex:1;min-width:0}
+.files .nama a{font-weight:700;overflow-wrap:anywhere}
+.files .nama small{display:block;color:var(--muted)}
+.files button{font:inherit;font-weight:700;cursor:pointer;padding:5px 14px;border-radius:999px;border:2px solid var(--cocoa);background:var(--pink);color:var(--cocoa)}
+.files button:hover{background:var(--cocoa);color:var(--cream)}
+.kosong{color:var(--cocoa);opacity:.75;font-size:.95rem;margin-top:6px}
+.chick{position:absolute;right:14px;top:-34px;width:56px;animation:loncat 2.2s ease-in-out infinite}
 
-footer{text-align:center;color:var(--muted);font-size:.9rem;padding:50px 16px 30px}
+footer{position:relative;z-index:1;text-align:center;color:var(--muted);font-weight:700;padding:60px 16px 34px}
+footer svg{width:60px;display:block;margin:0 auto 6px}
 
-@media (max-width:780px){.hero{grid-template-columns:1fr;text-align:center}.avatar{order:-1;width:min(65%,240px)}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+/* konfeti */
+.confetti{position:fixed;top:-30px;z-index:50;pointer-events:none;animation:jatuh linear forwards}
+@keyframes jatuh{to{transform:translateY(110vh) rotate(540deg);opacity:.8}}
+
+@media (max-width:780px){
+  .hero{grid-template-columns:1fr;text-align:center}
+  .mascot{order:-1;width:min(65%,240px)}
+  .bubble{right:-6px}
+  .topbar{border-radius:26px;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 
+<!-- Definisi karakter (dipakai ulang) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="beruang-kecil" viewBox="0 0 200 200">
+      <circle cx="48" cy="50" r="26" fill="#b9855a" stroke="#6b4a33" stroke-width="5"/>
+      <circle cx="152" cy="50" r="26" fill="#b9855a" stroke="#6b4a33" stroke-width="5"/>
+      <circle cx="48" cy="50" r="12" fill="#f3d9bb"/><circle cx="152" cy="50" r="12" fill="#f3d9bb"/>
+      <ellipse cx="100" cy="112" rx="78" ry="70" fill="#d3a577" stroke="#6b4a33" stroke-width="5"/>
+      <ellipse cx="100" cy="135" rx="32" ry="24" fill="#fbebd0"/>
+      <ellipse cx="100" cy="124" rx="9" ry="6" fill="#5a3e2b"/>
+      <path d="M100 130v6M100 136q-8 8-16 2M100 136q8 8 16 2" fill="none" stroke="#5a3e2b" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="72" cy="100" r="8" fill="#3d2a1d"/><circle cx="128" cy="100" r="8" fill="#3d2a1d"/>
+      <circle cx="75" cy="97" r="2.5" fill="#fff"/><circle cx="131" cy="97" r="2.5" fill="#fff"/>
+      <circle cx="52" cy="124" r="10" fill="#f6b3a8" opacity=".7"/><circle cx="148" cy="124" r="10" fill="#f6b3a8" opacity=".7"/>
+    </symbol>
+    <symbol id="ayam" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="58" rx="36" ry="32" fill="#ffd95a" stroke="#6b4a33" stroke-width="4"/>
+      <path d="M44 26q-4-12 4-14M52 26q2-12 10-12" fill="none" stroke="#6b4a33" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="38" cy="52" r="5" fill="#3d2a1d"/><circle cx="62" cy="52" r="5" fill="#3d2a1d"/>
+      <circle cx="40" cy="50" r="1.6" fill="#fff"/><circle cx="64" cy="50" r="1.6" fill="#fff"/>
+      <path d="M44 60l6 8 6-8z" fill="#f59e42" stroke="#6b4a33" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="28" cy="62" r="6" fill="#f6b3a8" opacity=".7"/><circle cx="72" cy="62" r="6" fill="#f6b3a8" opacity=".7"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="floaty" aria-hidden="true"><span>🍯</span><span>⭐</span><span>🧸</span><span>🌼</span><span>🍪</span><span>☁️</span></div>
+
 <header class="topbar">
-  <a class="brand" href="#tugas1">Adell</a>
+  <a class="brand" href="#beranda"><svg aria-hidden="true"><use href="#beruang-kecil"/></svg>Adell</a>
   <nav aria-label="Menu">
     <a href="#tugas1">Tugas 1</a>
     <a href="#tugas2">Tugas 2</a>
@@ -110,66 +215,105 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:50px 16px 30
 
 <main>
 
-<!-- ===== TUGAS 1 : BIODATA ===== -->
-<section class="box" id="tugas1">
-  <h2>Tugas 1 · Biodata</h2>
-
+<!-- ===== SAMBUTAN ===== -->
+<section class="box" id="beranda">
   <div class="hero">
     <div>
-      <small>Selamat datang di website saya</small>
-      <h1>Adelia Aisyah Azizah Ahmad</h1>
+      <small>Selamat datang di website saya <span class="wave">👋</span></small>
+      <h1>Hai, aku <em>Adelia Aisyah Azizah Ahmad</em></h1>
       <p>Mahasiswa Universitas Lambung Mangkurat. Halo! Saya Adell, orang yang sangat ceria.</p>
+      <div class="typing" id="typing" aria-live="off"></div>
     </div>
-    <div class="avatar">
-      <img src="profil.jpg.jpeg" alt="Foto profil" onerror="this.remove()">
-      <span aria-hidden="true">A</span>
+
+    <div class="mascot">
+      <div class="bubble">Halo! 💛</div>
+      <svg class="bear" viewBox="0 0 200 220" role="img" aria-label="Maskot beruang lucu yang melambai">
+        <circle cx="48" cy="50" r="26" fill="#b9855a" stroke="#6b4a33" stroke-width="5"/>
+        <circle cx="152" cy="50" r="26" fill="#b9855a" stroke="#6b4a33" stroke-width="5"/>
+        <circle cx="48" cy="50" r="12" fill="#f3d9bb"/><circle cx="152" cy="50" r="12" fill="#f3d9bb"/>
+        <ellipse cx="100" cy="190" rx="52" ry="30" fill="#d3a577" stroke="#6b4a33" stroke-width="5"/>
+        <ellipse cx="100" cy="112" rx="78" ry="70" fill="#d3a577" stroke="#6b4a33" stroke-width="5"/>
+        <ellipse cx="100" cy="135" rx="32" ry="24" fill="#fbebd0"/>
+        <ellipse cx="100" cy="124" rx="9" ry="6" fill="#5a3e2b"/>
+        <path d="M100 130v6M100 136q-8 9-17 2M100 136q8 9 17 2" fill="none" stroke="#5a3e2b" stroke-width="4" stroke-linecap="round"/>
+        <g class="eye"><circle cx="72" cy="100" r="9" fill="#3d2a1d"/><circle class="pupil" cx="75" cy="97" r="3" fill="#fff"/></g>
+        <g class="eye"><circle cx="128" cy="100" r="9" fill="#3d2a1d"/><circle class="pupil" cx="131" cy="97" r="3" fill="#fff"/></g>
+        <circle cx="52" cy="126" r="10" fill="#f6b3a8" opacity=".75"/><circle cx="148" cy="126" r="10" fill="#f6b3a8" opacity=".75"/>
+        <circle cx="52" cy="200" r="16" fill="#c99a6b" stroke="#6b4a33" stroke-width="5"/>
+        <g class="paw-wave"><circle cx="152" cy="190" r="16" fill="#c99a6b" stroke="#6b4a33" stroke-width="5"/></g>
+      </svg>
     </div>
-  </div>
-
-  <div class="data-grid">
-    <div class="card data"><span>Nama lengkap</span><b>Adelia Aisyah Azizah Ahmad</b></div>
-    <div class="card data"><span>Nama panggilan</span><b>Adell</b></div>
-    <div class="card data"><span>Tempat, tanggal lahir</span><b>Kendari, 03 Agustus 2005</b></div>
-    <div class="card data"><span>Jenis kelamin</span><b>Perempuan</b></div>
-    <div class="card data"><span>Agama</span><b>Islam</b></div>
-    <div class="card data"><span>Alamat</span><b>Bati Bati</b></div>
-    <div class="card data"><span>Pendidikan</span><b>Universitas Lambung Mangkurat</b></div>
-    <div class="card data"><span>Email</span><b><a href="mailto:yayalyaa2005@gmail.com">yayalyaa2005@gmail.com</a></b></div>
-    <div class="card data"><span>Telepon</span><b>0895383422229</b></div>
-  </div>
-  <ul class="hobi" aria-label="Hobi">
-    <li>🍳 Memasak</li><li>🎧 Mendengarkan musik</li><li>🏀 Basket</li><li>✈️ Traveling</li>
-  </ul>
-
-  <div class="galeri">
-
-  <h3 class="sub">📷 Foto</h3>
-  <div class="photos">
-    <figure class="card"><img src="foto1.jpg.jpeg" alt="Foto 1" loading="lazy"><figcaption>Tampilan rumah dari depan</figcaption></figure>
-    <figure class="card"><img src="foto2.jpg.jpeg" alt="Foto 2" loading="lazy"><figcaption>Tampilan rumah dari kanan</figcaption></figure>
-    <figure class="card"><img src="foto3.jpg.jpeg" alt="Foto 3" loading="lazy"><figcaption>Tampilan rumah dari kiri</figcaption></figure>
-    <figure class="card"><img src="foto4.jpg.jpeg" alt="Foto 4" loading="lazy"><figcaption>Tampilan rumah dari belakang</figcaption></figure>
-  </div>
-  <h3 class="sub">🎬 Video</h3>
-  <div class="videos">
-    <figure class="card"><video controls preload="metadata"><source src="video1.mp4.mp4" type="video/mp4"></video><figcaption>Keterangan video 1</figcaption></figure>
-    <figure class="card"><video controls preload="metadata"><source src="video2.mp4,mp4" type="video/mp4"></video><figcaption>Keterangan video 2</figcaption></figure>
-  </div>
   </div>
 </section>
 
-<!-- ===== TUGAS 2 - 4 : KLIK BARU MUNCUL ===== -->
+<!-- ===== TUGAS 1 - 4 : KLIK BARU MUNCUL ===== -->
 <section class="box" id="tugas">
-  <h2>Tugas Lainnya</h2>
-  <p class="catatan">Klik salah satu tugas untuk membuka kotak uploadnya.</p>
+  <h2>Daftar Tugas</h2>
+  <div class="intro">
+    <svg aria-hidden="true"><use href="#ayam"/></svg>
+    <p class="catatan">Klik salah satu tugas untuk membukanya. Piyo-piyo, yuk intip satu-satu! 🐥</p>
+  </div>
+
+  <!-- Tugas 1 : Biodata -->
+  <div class="acc" id="tugas1">
+    <button class="acc-btn" type="button" aria-expanded="false" aria-controls="panel1">Tugas 1 · Biodata <span aria-hidden="true">＋</span></button>
+    <div class="acc-panel" id="panel1" hidden>
+
+      <div class="avatar-wrap">
+        <div class="avatar">
+          <img src="profil.jpg.jpeg" alt="Foto profil" onerror="this.remove()">
+          <span aria-hidden="true">A</span>
+        </div>
+      </div>
+
+      <div class="data-grid">
+        <div class="card data"><span>Nama lengkap</span><b>Adelia Aisyah Azizah Ahmad</b></div>
+        <div class="card data"><span>Nama panggilan</span><b>Adell</b></div>
+        <div class="card data"><span>Tempat, tanggal lahir</span><b>Kendari, 03 Agustus 2005</b></div>
+        <div class="card data"><span>Jenis kelamin</span><b>Perempuan</b></div>
+        <div class="card data"><span>Agama</span><b>Islam</b></div>
+        <div class="card data"><span>Alamat</span><b>Bati Bati</b></div>
+        <div class="card data"><span>Pendidikan</span><b>Universitas Lambung Mangkurat</b></div>
+        <div class="card data"><span>Email</span><b><a href="mailto:yayalyaa2005@gmail.com">yayalyaa2005@gmail.com</a></b></div>
+        <div class="card data"><span>Telepon</span><b>0895383422229</b></div>
+      </div>
+
+      <h3 class="hobi-title">🎀 Hobiku</h3>
+      <ul class="hobi" aria-label="Hobi">
+        <li>🍳 Memasak</li><li>🎧 Mendengarkan musik</li><li>🏀 Basket</li><li>✈️ Traveling</li>
+      </ul>
+
+      <div class="galeri">
+        <h3 class="sub">📷 Foto</h3>
+        <div class="photos">
+          <figure class="card"><img src="foto1.jpg.jpeg" alt="Foto 1" loading="lazy"><figcaption>Tampilan rumah dari depan</figcaption></figure>
+          <figure class="card"><img src="foto2.jpg.jpeg" alt="Foto 2" loading="lazy"><figcaption>Tampilan rumah dari kanan</figcaption></figure>
+          <figure class="card"><img src="foto3.jpg.jpeg" alt="Foto 3" loading="lazy"><figcaption>Tampilan rumah dari kiri</figcaption></figure>
+          <figure class="card"><img src="foto4.jpg.jpeg" alt="Foto 4" loading="lazy"><figcaption>Tampilan rumah dari belakang</figcaption></figure>
+        </div>
+        <h3 class="sub">🎬 Video</h3>
+        <div class="videos">
+          <figure class="card"><video controls preload="metadata"><source src="video1.mp4.mp4" type="video/mp4"></video><figcaption>Keterangan video 1</figcaption></figure>
+          <figure class="card"><video controls preload="metadata"><source src="video2.mp4,mp4" type="video/mp4"></video><figcaption>Keterangan video 2</figcaption></figure>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Tugas 2 -->
   <div class="acc" id="tugas2">
     <button class="acc-btn" type="button" aria-expanded="false" aria-controls="panel2">Tugas 2 <span aria-hidden="true">＋</span></button>
     <div class="acc-panel" id="panel2" hidden><div class="tugas" data-id="2"></div></div>
   </div>
+
+  <!-- Tugas 3 -->
   <div class="acc" id="tugas3">
     <button class="acc-btn" type="button" aria-expanded="false" aria-controls="panel3">Tugas 3 <span aria-hidden="true">＋</span></button>
     <div class="acc-panel" id="panel3" hidden><div class="tugas" data-id="3"></div></div>
   </div>
+
+  <!-- Tugas 4 -->
   <div class="acc" id="tugas4">
     <button class="acc-btn" type="button" aria-expanded="false" aria-controls="panel4">Tugas 4 <span aria-hidden="true">＋</span></button>
     <div class="acc-panel" id="panel4" hidden><div class="tugas" data-id="4"></div></div>
@@ -178,11 +322,14 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:50px 16px 30
 
 </main>
 
-<footer>&copy; 2026 Adelia Aisyah Azizah Ahmad</footer>
+<footer>
+  <svg aria-hidden="true"><use href="#beruang-kecil"/></svg>
+  &copy; 2026 Adelia Aisyah Azizah Ahmad · dibuat dengan 💛
+</footer>
 
+<!-- Upload file (IndexedDB) -->
 <script>
 (function () {
-  // ---------- Penyimpanan file (IndexedDB) ----------
   var dbPromise = new Promise(function (resolve, reject) {
     try {
       var req = indexedDB.open('adell-tugas', 1);
@@ -212,11 +359,26 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:50px 16px 30
     return (b / 1048576).toFixed(1) + ' MB';
   }
 
-  // ---------- Bangun tiap kotak tugas ----------
+  function konfeti() {
+    var e = ['💛', '⭐', '🍯', '🌼', '🧸', '✨'];
+    for (var i = 0; i < 26; i++) {
+      var s = document.createElement('span');
+      s.className = 'confetti';
+      s.textContent = e[Math.floor(Math.random() * e.length)];
+      s.style.left = Math.random() * 100 + 'vw';
+      s.style.fontSize = (16 + Math.random() * 18) + 'px';
+      s.style.animationDuration = (2 + Math.random() * 2) + 's';
+      s.style.animationDelay = (Math.random() * .5) + 's';
+      document.body.appendChild(s);
+      setTimeout((function (x) { return function () { x.remove(); }; })(s), 4800);
+    }
+  }
+
   document.querySelectorAll('.tugas').forEach(function (box) {
     var n = box.dataset.id, key = 'tugas-' + n, urls = [];
 
     box.innerHTML =
+      '<svg class="chick" aria-hidden="true"><use href="#ayam"/></svg>' +
       '<input type="text" class="judul" placeholder="Judul tugas (opsional)" aria-label="Judul Tugas ' + n + '">' +
       '<textarea class="isi" placeholder="Catatan atau deskripsi (opsional)..." aria-label="Catatan Tugas ' + n + '"></textarea>' +
       '<label class="drop"><input type="file" multiple>📁 Klik di sini atau seret file ke sini<small>Foto, PDF, Word, Excel, PPT, video, semua boleh</small></label>' +
@@ -230,7 +392,6 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:50px 16px 30
         list = box.querySelector('.files'),
         status = box.querySelector('.status');
 
-    // Teks tersimpan otomatis
     try {
       var d = JSON.parse(localStorage.getItem(key) || 'null');
       if (d) { judul.value = d.judul || ''; isi.value = d.isi || ''; }
@@ -241,13 +402,12 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:50px 16px 30
     judul.addEventListener('input', simpanTeks);
     isi.addEventListener('input', simpanTeks);
 
-    // Tampilkan daftar file
     function render() {
       urls.forEach(URL.revokeObjectURL); urls = [];
       tx('readonly', function (s) { return s.index('tugas').getAll(n); }).then(function (items) {
         list.innerHTML = '';
         if (!items || !items.length) {
-          list.innerHTML = '<li class="kosong" style="background:none;border:0;padding:0">Belum ada file.</li>';
+          list.innerHTML = '<li class="kosong" style="background:none;border:0;padding:0">Belum ada file 🐥</li>';
           return;
         }
         items.forEach(function (it) {
@@ -271,7 +431,6 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:50px 16px 30
       });
     }
 
-    // Tambah file
     function tambah(files) {
       files = Array.prototype.slice.call(files);
       if (!files.length) return;
@@ -281,7 +440,8 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:50px 16px 30
           return s.add({ tugas: n, name: f.name, type: f.type || '', size: f.size, blob: f, waktu: waktu });
         });
       })).then(function () {
-        status.textContent = '✓ ' + files.length + ' file berhasil diupload.';
+        status.textContent = '🎉 ' + files.length + ' file berhasil diupload. Hebat!';
+        konfeti();
         render();
       }).catch(function () {
         status.textContent = 'Gagal menyimpan file. Penyimpanan browser mungkin penuh.';
@@ -302,6 +462,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:50px 16px 30
 })();
 </script>
 
+<!-- Accordion -->
 <script>
 (function(){
   var items=document.querySelectorAll('.acc');
@@ -321,6 +482,34 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:50px 16px 30
     if(el){items.forEach(function(o){buka(o,false)});buka(el,true);}
   }
   window.addEventListener('hashchange',dariHash);dariHash();
+})();
+</script>
+
+<!-- Efek lucu: teks mengetik + mata beruang mengikuti kursor -->
+<script>
+(function(){
+  var kata=['Mahasiswa ULM 🎓','Suka masak 🍳','Suka basket 🏀','Hobi traveling ✈️','Selalu ceria! 💛'];
+  var el=document.getElementById('typing'),i=0,j=0,hapus=false;
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(reduce){el.textContent=kata[0];}
+  else{(function ketik(){
+    var t=kata[i];
+    el.textContent=t.slice(0,j);
+    if(!hapus&&j<t.length){j++;setTimeout(ketik,90);}
+    else if(!hapus){hapus=true;setTimeout(ketik,1400);}
+    else if(j>0){j--;setTimeout(ketik,45);}
+    else{hapus=false;i=(i+1)%kata.length;setTimeout(ketik,300);}
+  })();}
+
+  var pupils=document.querySelectorAll('.pupil');
+  var bear=document.querySelector('.mascot .bear');
+  if(bear&&!reduce){
+    document.addEventListener('mousemove',function(e){
+      var r=bear.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height*.45;
+      var a=Math.atan2(e.clientY-cy,e.clientX-cx);
+      pupils.forEach(function(p){p.style.transform='translate('+Math.cos(a)*3+'px,'+Math.sin(a)*3+'px)';});
+    });
+  }
 })();
 </script>
 
